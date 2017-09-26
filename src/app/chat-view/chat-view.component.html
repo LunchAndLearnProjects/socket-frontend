@@ -1,9 +1,26 @@
 <div class="mb-5">
   <div id="messages">
-    <div class="row rounded m-2" *ngFor="let message of messages">
-      <div class="col-3 p-1">
-        
+      <div class="row rounded m-2" *ngFor="let message of messages">
+        <div class="col-3 p-1">
+            <div class="text-{{ findColor(name, message.username) }}">
+              {{ message.username }}
+            </div>
+            <div class="text-muted">
+              {{ message.formattedDate }}
+            </div>
+        </div>
+        <div class="col-9 bg-{{ findColor(name, message.username) }} text-white p-1 pl-4 align-self-center">
+            {{ message.value }}
+        </div>
       </div>
-    </div>
   </div>
 </div>
+
+<form class="fixed-bottom" (ngSubmit)="sendMessage()">
+  <div class="input-group">
+    <input class="form-control" [(ngModel)]="message" name="message" placeholder="Type here..." autocomplete="off">
+    <span class="input-group-btn">
+      <button class="btn btn-secondary" type="submit">Send</button>
+    </span>
+  </div>
+</form>
